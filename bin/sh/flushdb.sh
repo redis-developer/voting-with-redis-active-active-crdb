@@ -1,3 +1,5 @@
+#!/bin/bash
+
 redis-cli -p 12000 DEL ice-cream
 redis-cli -p 12000 DEL cheesecake
 redis-cli -p 12000 DEL apple-pie
