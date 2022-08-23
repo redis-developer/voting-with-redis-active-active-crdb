@@ -1,0 +1,57 @@
+version: "3.9"
+services:
+  dc:
+    container_name: dc
+    build:
+      context: ./app
+      args:
+        - REDIS_URL=redis://172.18.0.2:12000
+        - NEXT_PUBLIC_REGION=Washington, DC
+    ports:
+      - 3000:3000
+    networks:
+      - network1
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+  nyc:
+    container_name: nyc
+    build:
+      context: ./app
+      args:
+        - REDIS_URL=redis://172.19.0.2:12000
+        - NEXT_PUBLIC_REGION=New York
+    ports:
+      - 3002:3000
+    networks:
+      - network2
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+  sf:
+    container_name: sf
+    build:
+      context: ./app
+      args:
+        - REDIS_URL=redis://172.20.0.2:12000
+        - NEXT_PUBLIC_REGION=San Francisco
+    ports:
+      - 3004:3000
+    networks:
+      - network3
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+networks:
+  network1:
+    name: network1
+    external: true
+  network2:
+    name: network2
+    external: true
+  network3:
+    name: network3
+    external: true
