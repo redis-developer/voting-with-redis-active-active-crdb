@@ -1,5 +1,7 @@
 This is a simple application that demonstrates Redis Enterprise active-active capabilities. It uses Next.js and Tailwind on the frontend to show a basic voting application. A Redis cluster is configured for active-active in 3 regions.
 
+![voting-with-redis-active-active-crdb-min](https://user-images.githubusercontent.com/785258/188220466-78356863-01aa-4496-8f01-ca27168a679f.png)
+
 ## Getting Started
 
 Start by setting up your redis instances using the scripts in the `bin` directory:
