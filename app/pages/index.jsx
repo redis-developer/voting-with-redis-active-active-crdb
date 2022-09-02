@@ -55,7 +55,7 @@ export default function Home(props) {
                         />
                         <div className="flex flex-wrap justify-center space-x-2">
                             <span className="px-4 py-2 rounded-full text-white bg-blue-500 font-semibold text-sm flex align-center w-max cursor-pointer active:bg-blue-600 transition duration-300 ease">
-                                {votes.iceCream}
+                                {votes.iceCream ?? 0}
                             </span>
                         </div>
                     </div>
@@ -75,7 +75,7 @@ export default function Home(props) {
                         />
                         <div className="flex flex-wrap justify-center space-x-2">
                             <span className="px-4 py-2 rounded-full text-white bg-teal-500 font-semibold text-sm flex align-center w-max cursor-pointer active:bg-teal-600 transition duration-300 ease">
-                                {votes.cheesecake}
+                                {votes.cheesecake ?? 0}
                             </span>
                         </div>
                     </div>
@@ -95,7 +95,7 @@ export default function Home(props) {
                         />
                         <div className="flex flex-wrap justify-center space-x-2">
                             <span className="px-4 py-2 rounded-full text-white bg-green-500 font-semibold text-sm flex align-center w-max cursor-pointer active:bg-green-600 transition duration-300 ease">
-                                {votes.applePie}
+                                {votes.applePie ?? 0}
                             </span>
                         </div>
                     </div>

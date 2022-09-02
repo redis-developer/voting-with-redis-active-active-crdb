@@ -32,10 +32,10 @@ docker network connect network2 rp3
 echo ""
 echo "Waiting for the servers to start..."
 
-sleep 60
+timeout 60
 
 @REM Create 3 Redis Enterprise clusters -- one for each network. You can login to
-@REM a cluster as https://localhost:8443/ (or 8445, 8447). The user name is
+@REM a cluster at https://localhost:8443/ (or 8445, 8447). The user name is
 @REM r@r.com, password is password. Change the user
 echo ""
 echo "Creating clusters"
