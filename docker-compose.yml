@@ -1,16 +1,61 @@
 version: "3.9"
 services:
+  redis-dc:
+    container_name: redis-dc
+    image: "redislabs/redis:latest"
+    ports:
+      - 8443:8443
+      - 9443:9443
+      - 12000:12000
+    cap_add:
+      - sys_resource
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    networks:
+      - network-dc
+  redis-nyc:
+    container_name: redis-nyc
+    image: "redislabs/redis:latest"
+    ports:
+      - 8445:8443
+      - 9445:9443
+      - 12002:12000
+    cap_add:
+      - sys_resource
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    networks:
+      - network-nyc
+  redis-sf:
+    container_name: redis-sf
+    image: "redislabs/redis:latest"
+    ports:
+      - 8447:8443
+      - 9447:9443
+      - 12004:12000
+    cap_add:
+      - sys_resource
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    networks:
+      - network-sf
   dc:
     container_name: dc
     build:
       context: ./app
       args:
-        - REDIS_URL=redis://172.18.0.2:12000
+        - REDIS_URL=redis://redis-dc:12000
         - NEXT_PUBLIC_REGION=Washington, DC
     ports:
       - 3000:3000
     networks:
-      - network1
+      - network-dc
     deploy:
       replicas: 1
       restart_policy:
@@ -20,12 +65,12 @@ services:
     build:
       context: ./app
       args:
-        - REDIS_URL=redis://172.19.0.2:12000
+        - REDIS_URL=redis://redis-nyc:12000
         - NEXT_PUBLIC_REGION=New York
     ports:
       - 3002:3000
     networks:
-      - network2
+      - network-nyc
     deploy:
       replicas: 1
       restart_policy:
@@ -35,23 +80,17 @@ services:
     build:
       context: ./app
       args:
-        - REDIS_URL=redis://172.20.0.2:12000
+        - REDIS_URL=redis://redis-sf:12000
         - NEXT_PUBLIC_REGION=San Francisco
     ports:
       - 3004:3000
     networks:
-      - network3
+      - network-sf
     deploy:
       replicas: 1
       restart_policy:
         condition: on-failure
 networks:
-  network1:
-    name: network1
-    external: true
-  network2:
-    name: network2
-    external: true
-  network3:
-    name: network3
-    external: true
+  network-dc: {}
+  network-nyc: {}
+  network-sf: {}
